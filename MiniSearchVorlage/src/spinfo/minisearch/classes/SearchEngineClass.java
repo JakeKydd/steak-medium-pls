@@ -48,6 +48,7 @@ public class SearchEngineClass implements ISearchEngine {
 		// TODO Auto-generated method stub
 		System.out.println("\n Suche gestartet: "+ indexedWords.size()+ " " + text);
 		
+		// Prüfe, ob das eine Phrasensuche ist oder nicht
 		if(text.contains("\"")){
 			System.out.println("\n Suche ist Phrase ");
 		}else{
