@@ -1,0 +1,2 @@
+Dies hier ist ein Test, der sich in einem inneren Ordner findet.
+Sonst kann dieser Test nichts.

@@ -1,0 +1,1 @@
+Das ist ein einfacher Test für die Umlaute. Wenn hier alles korrekt dargestellt wird, heißt es, daß vernünftig gearbeitet wurde. Und noch was, nämlich gleicher und Wortfolgen hier auseinander stehend. Dieser Text darf also beim Test, bei dem nach der Phrase gesucht wird, nicht gefunden werden.

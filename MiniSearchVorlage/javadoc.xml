@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+<target name="javadoc">
+<javadoc access="package" additionalparam=" -encoding UTF-8 -docencoding ISO-8859-1" author="true" classpath="lib/napkinlaf.jar:lib/swing-layout-1.0.3.jar:lib/junit-4.4.jar:lib/napkinlaf-swingset2.jar" destdir="doc" doctitle="MiniSearch JavaDoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.5" sourcepath="src" splitindex="true" use="true" version="true">
+<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+</javadoc>
+</target>
+</project>

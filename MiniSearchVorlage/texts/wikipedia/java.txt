@@ -1,0 +1,162 @@
+Java ist eine objektorientierte Programmiersprache und als solche ein eingetragenes Warenzeichen der Firma Sun Microsystems. Sie ist eine Komponente der Java-Technologie.
+
+Java-Programme werden in Bytecode übersetzt und dann in einer speziellen Umgebung ausgeführt, die als Java-Laufzeitumgebung oder Java-Plattform bezeichnet wird. Deren wichtigster Bestandteil ist die Java Virtual Machine (Java-VM), die die Programme ausführt, indem sie den Bytecode interpretiert und bei Bedarf kompiliert (Hotspot-Optimierung).
+
+Java-Programme laufen in aller Regel ohne weitere Anpassungen auf verschiedenen Computern und Betriebssystemen, für die eine Java-VM existiert. Sun selbst bietet Java-VMs für die Betriebssysteme Linux, Solaris und Windows an. Andere Hersteller lassen ihre Java-VM für ihre Plattform zertifizieren, zum Beispiel die Firma Apple für Mac OS X.
+
+Von Portierung spricht man bei Java in der Regel, wenn Quelltext oder Bytecode auf den Stand einer anderen Java-Version angepasst werden soll. Meistens sind Java-Programme nur für bestimmte Java-Versionen getestet oder zertifiziert.
+
+Grundkonzepte der Sprache
+
+Der Entwurf der Programmiersprache Java strebte im Wesentlichen fünf Ziele an.
+
+    * Sie soll eine objektorientierte Programmiersprache sein.
+    * Sie soll ermöglichen, gleiche Programme auf unterschiedlichen Computersystemen auszuführen.
+    * Sie soll eingebaute Unterstützung für die Verwendung von Computernetzen enthalten.
+    * Sie soll Code aus entfernten Quellen sicher ausführen können. Dieser Punkt wird über das Sicherheitskonzept von Java erreicht, das aus drei Schichten besteht:
+         1. dem Code-Verifier (deutsch „Code-Überprüfer“), der sicherstellt, dass die JVM keinen ungültigen Bytecode ausführen kann.
+         2. den Class-Loadern (deutsch „Klassenlader“), die die sichere Zuführung von Klasseninformationen zur JVM steuern (diese ist dabei kein Interpreter, siehe unten).
+         3. den Security-Managern (deutsch „Sicherheitsverwalter“), die sicherstellen, dass nur Zugriff auf Programmobjekte erlaubt wird, für die entsprechende Rechte vorhanden sind.
+    * Die erfolgreichen Aspekte bereits verbreiteter objektorientierter Programmiersprachen wie C++ sollen auch für Java-Programmierer zur Verfügung stehen.
+
+Objektorientierung
+
+Die Sprache Java gehört zu den objektorientierten Programmiersprachen. Die Grundidee der objektorientierten Programmierung ist die softwaretechnische Abbildung in einer Art und Weise, wie wir Menschen auch Dinge der realen Welt erfahren. Die Absicht dahinter ist, große Softwareprojekte einfacher verwalten zu können und die Qualität der Software zu erhöhen. Ein weiteres Ziel der Objektorientierung ist ein hoher Grad der Wiederverwendbarkeit von Softwaremodulen.
+
+Ein neuer Aspekt von Java gegenüber den zuvor verbreitetsten objektorientierten Programmiersprachen C++ und Smalltalk ist die explizite Unterscheidung zwischen Schnittstellen und Klassen, die durch entsprechende Schlüsselwörter interface und class zur Geltung kommt. Java unterstützt keine direkte Mehrfachvererbung (wie z. B. C++ oder Eiffel), wobei einige Problemstellungen, die damit gelöst werden, durch den Einsatz mehrerer Schnittstellen angegangen werden können. Dabei werden nur die Methodensignaturen an die abgeleiteten Klassen weitergegeben, jedoch keine Attribute und keine Implementierungen der Methoden.
+
+Java ist nicht vollständig objektorientiert: Die Grunddatentypen (int, boolean usw.) sind keine Objekte (siehe auch unter Java-Syntax).
+
+Reflection
+
+Java bietet eine Reflection-API als Bestandteil der Laufzeitumgebung. Damit ist es möglich, zur Laufzeit auf Klassen und Methoden zuzugreifen, deren Existenz oder genaue Ausprägung zur Zeit der Programmerstellung nicht bekannt war.
+
+Annotations
+
+Mit Java 5 hat Sun die Programmiersprache um Annotations erweitert. Annotations erlauben die Notation von Metadaten und ermöglichen bis zu einem gewissen Grad benutzerdefinierte Spracherweiterungen. Sinn der Annotations ist u.a. die automatische Erzeugung von Code und anderen in der Software-Entwicklung wichtigen Dokumenten für wiederkehrende Muster anhand möglichst kurzer Hinweise im Quelltext. Bislang wurden in Java dafür ausschließlich Javadoc-Kommentare mit speziellen JavaDoc-Tags verwendet, die von Doclets wie zum Beispiel dem XDoclet ausgewertet wurden.
+
+Annotations können auch in den kompilierten Class-Dateien enthalten sein. Der Quelltext wird also für ihre Verwendung nicht benötigt. Insbesondere sind die Annotationen auch über die Reflection-API zugänglich. So können sie zum Beispiel zur Erweiterung des Bean-Konzeptes verwendet werden.
+
+Modulare Ausführung auf fernen Computern
+
+Java bietet die Möglichkeit, Klassen zu schreiben, die in unterschiedlichen Ausführungsumgebungen ablaufen. Beispielsweise lassen sich Applets in Webbrowsern, die Java unterstützen, ausführen. Das Sicherheitskonzept von Java kann dazu eingesetzt werden, dass unbekannte Klassen dabei keinen Schaden anrichten können, was vor allem bei Applets wichtig ist (siehe auch Sandbox). Beispiele für in entsprechenden Ausführungsumgebungen ausführbare Java-Module sind Applets, Servlets, Portlets, Midlets, Xlets, Translets, und Enterprise Java Beans.
+
+Merkmale der Sprache
+
+Der Objektzugriff in Java ist über Referenzen implementiert. Aus Sicherheitsgründen ist es nicht möglich, deren Speicheradresse zu modifizieren. So genannte Zeigerarithmetik ist mit der Sprache also ausgeschlossen. Per Design können so Fehler, welche häufig in anderen Programmiersprachen auftreten, von vornherein ausgeschlossen werden.
+
+Zusammengehörige Klassen werden in Paketen (englisch packages) zusammengefasst. Diese Pakete ermöglichen die Einschränkung der Sichtbarkeit von Klassen, eine Strukturierung von größeren Projekten sowie eine Trennung des Namensraums für verschiedene Entwickler. Die Paketnamen sind hierarchisch aufgebaut und beginnen im Allgemeinen mit dem (umgekehrten) Internet-Domainnamen des Entwicklers. (Pakete, die von Sun erstellt werden, beginnen z. B. mit „com.sun.“) Klassennamen müssen nur innerhalb eines Paketes eindeutig sein. Hierdurch ist es möglich, Klassen von verschiedenen Entwicklern zu kombinieren, ohne dass es zu Namenskonflikten kommt. Die Hierarchie der Paketnamen hat allerdings keine semantische Bedeutung. Bei der Sichtbarkeit zwischen den Klassen zweier Pakete spielt es keine Rolle, wo sich die Pakete in der Namenshierarchie befinden. Klassen sind entweder nur für Klassen des eigenen Paketes sichtbar, oder für alle Pakete.
+
+Weiter unterstützt die Sprache Threads (nebenläufig ablaufende Programmteile) und Ausnahmen (englisch exception) und Java beinhaltet auch eine automatische Speicherbereinigung (englisch garbage collector), die nicht (mehr) referenzierte Objekte aus dem Speicher entfernt.
+
+Bemerkenswert ist auch die explizite Unterscheidung von Schnittstellen und Klassen. Eine Klasse kann beliebig viele Schnittstellen implementieren, hat aber stets genau eine Basisklasse. Java unterstützt keine Mehrfachvererbung, da lediglich Schnittstellen, jedoch keine Klassen „mehrfach“ vererbt werden können. Funktionen (in der Java-Welt „Methoden“) werden nur von der Basisklasse übernommen. Alle Klassen sind – direkt oder indirekt – von der Wurzelklasse Object abgeleitet.
+
+Zu Java gehört eine umfangreiche Klassenbibliothek. Dem Programmierer wird damit eine einheitliche, vom zugrunde liegenden Betriebssystem unabhängige Schnittstelle (Application programming interface, API) angeboten.
+
+Mit Java 1.2 wurden die Java Foundation Classes (JFC) eingeführt, die unter anderem Swing bereitstellen, das zur Erzeugung plattformunabhängiger grafischer Benutzerschnittstellen (GUI) dient und auf AWT basiert.
+
+Syntax
+
+Hauptartikel: Java-Syntax
+
+Syntax/Grammatik und Semantik von Java sind in der Java Language Specification (Java-Sprachspezifikation) von Sun Microsystems dokumentiert. Das folgende Beispielprogramm gibt eine Meldung auf der Konsole aus.
+
+public class HalloWelt {
+     public static void main(String[] args) {
+         System.out.println("Hallo Welt!");
+     }
+ }
+
+Entstehung und Weiterentwicklung der Sprache
+
+Entstehung
+
+Herkunft und Entwicklung der Programmiersprache Java sowie mit ihr verwandter Technik sind im Artikel Java (Technologie) beschrieben.
+
+Sun und JCP
+
+Neben Sun kümmert sich eine Vielzahl von Einzelpersonen, kleiner und großer Unternehmen, wie Apple, IBM, Hewlett-Packard und Siemens beim Java Community Process (JCP) unter anderem um die Weiterentwicklung der Java-Sprachspezifikation. Der JCP wurde 1998 von Sun Microsystems ins Leben gerufen.
+
+Java als freie Software
+
+Sun hat zugesichert, sein JDK unter der GNU General Public License zu veröffentlichen. Am 13. November 2006 wurden bereits mit dem Compiler javac und der Hotspot Virtual Machine erste Teile als Open Source veröffentlicht. Zudem wurde eine Community-Seite eröffnet, mit deren Hilfe die Entwicklung koordiniert werden soll.[1] Am 8. Mai 2007 folgten dann große Teile des „Java SE“-Quellcodes zum Erstellen eines JDK. Ausnahme ist Code, für den Sun nicht die nötigen Rechte besitzt, um ihn freizugeben und somit nur in kompilierter Form vorliegen.[2] Ebenfalls kündigte Sun an, dass Entwicklungen auf Grundlage des OpenJDK das „Java Compatible“-Logo führen dürfen, wenn sie nach dem „Technical Compatibility Kit“ (JCK) zertifiziert sind.
+
+Zuvor wurde der Quelltext von Java unter anderem bei jedem JDK mitgeliefert und ermöglichte so zwar Einsicht, er durfte aber nicht beliebig modifiziert werden. Deswegen gibt es neben den offiziellen JCP auch eine Menge unabhängiger Vereinigungen, die es sich zum Ziel gesetzt haben, ein unter eine freie Open-Source-Lizenz gestelltes Java bereitzustellen. Die bekanntesten dieser Projekte sind Apache Harmony, Kaffe und das GNU-Classpath-Projekt.
+
+Unterschiede zu ähnlichen Sprachen
+
+JavaScript
+
+Java ist nicht mit der Skriptsprache JavaScript zu verwechseln, die vornehmlich in HTML-Seiten zur eingebetteten Programmierung verwendet wird. Sie hat eine ähnliche Syntax, unterscheidet sich jedoch in vielerlei Hinsicht von Java und wird nur selten zur Konstruktion größerer Anwendungen verwendet.
+
+Smalltalk
+
+Smalltalk ist eine der ältesten objektorientierten Programmiersprachen überhaupt. Java erbt von Smalltalk die grundsätzliche Konzeption eines Objektbaumes, in den alle Objekte eingehängt werden und von einem einzigen Mutterobjekt abstammen (java.lang.Object). Außerdem wurde das Konzept der automatischen Speicherbereinigung (garbage collector) und der virtuellen Maschine übernommen sowie eine Vielzahl weiterer Merkmale der Sprache Smalltalk.
+
+Smalltalk kennt jedoch keine primitiven Datentypen wie zum Beispiel int – selbst eine einfache Zahl ist ein Objekt. Dieses Konzept wurde nicht nach Java übernommen.
+
+C++
+
+Java lehnt seine Syntax an die der Programmiersprache C++ an. Im Gegensatz zu C++ fanden jedoch komplexe Konstrukte wie Mehrfachvererbung oder die fehleranfällige Zeigerarithmetik keinen Einzug. Die interne Speicherverwaltung wird dem Java-Entwickler weitgehend abgenommen; dies erledigt die automatische Speicherbereinigung. Deshalb ist Java in vielen Fällen leichter zu handhaben als C++. Allerdings garantiert auch dieser Mechanismus nicht den vollständigen Ausschluss von Speicherlecks. Letztlich muss der Programmierer dafür sorgen, dass nicht mehr verwendete Objekte nirgends mehr referenziert werden.
+
+Neben Mehrfachvererbung und Speicherarithmetik wurden bei der Entwicklung von Java noch weitere Konstrukte der Sprache C++ bewusst weggelassen:
+
+Im Gegensatz zu C++ ist es in Java nicht möglich, Operatoren (zum Beispiel arithmetische Operatoren wie + und -, logische Operatoren wie && und ||, oder den Index-Operator []) zu überladen, das heißt in einem bestimmten Kontext mit neuer Bedeutung zu versehen. Dies sorgt einerseits für eine Vereinfachung der Sprache an sich und verhindert, dass Quellcodes mit Operatoren, die mit schwer nachvollziehbarer Semantik überladen werden, unlesbar gemacht werden. Andererseits können benutzerdefinierte Typen mit überladenen Operatoren in C++ eher wie eingebaute Typen erscheinen und vor allem numerischer Code ist mitunter einfacher nachzuvollziehen. Die Sprachdefinition von Java definiert jedoch typabhängiges Verhalten der Operatoren + (Addition bei arithmetischen Operanden, andernfalls zur Verkettung von Zeichenketten („string concatenation“)) sowie &, | und ^ (logisch für boolean und bitweise für arithmetische Operanden). Das lässt diese Operatoren zumindest wie teilweise überladene Operatoren erscheinen.
+
+Das C++-Konstrukt der „Templates“, die es erlauben, Algorithmen oder sogar ganze Klassen unabhängig von den darin verwendeten Datentypen zu definieren, wurde in Java nicht übernommen. Seit Version 1.5 unterstützt Java aber sogenannte „Generics“, die zwar keinerlei Metaprogrammierung erlauben, aber ähnlich wie C++-Templates typsichere Container und ähnliches ermöglichen.
+
+C#
+
+Die von Microsoft entwickelte Programmiersprache C# (engl. C sharp; Aussprache [ˌsiːˈʃɑːp]) kann als Konkurrenzprodukt zu Java gesehen werden. Mit der Spezifikation von C# hat Microsoft im Rahmen seiner .NET-Strategie versucht, den Spagat zwischen dem kompletten Neuanfang einer Sprache und der leichten Integration bisher bestehender Komponenten zu schaffen.
+
+Konzeptionelle Unterschiede zu Java bestehen insbesondere in der Unterstützung von Delegaten (engl. delegates), einem Konzept, das mit Funktionszeigern vergleichbar ist. Hierbei kommt ein Beobachter-Entwurfsmuster zum Einsatz – Objekte können sich für Ereignisse registrieren bzw. diese delegieren. C# kennt ebenso wie Java eine Unterscheidung zwischen Werttypen (engl. value types; zum Beispiel int, struct) und Referenztypen (engl. reference types, zum Beispiel class), allerdings sind auch die elementaren Datentypen objektbasiert. Außerdem unterstützt C# sogenannte Attribute (attributes), die es erlauben, die Funktionalität der Sprache über Metadaten im Code zu erweitern (eine ähnliche Funktionalität wurde in Form der oben beschriebenen Annotations in Java 5.0 übernommen). C# enthält auch Bestandteile der Sprachen VisualBasic, zum Beispiel Eigenschaften („properties“), sowie Konzepte aus C++. In C# hingegen ist es nicht notwendig und möglich, Ausnahmen (exceptions) zu einer Methode zu deklarieren. In Java können Ausnahmen so deklariert werden, dass sie auch verarbeitet werden müssen (checked Exception).
+
+Um auch systemnahe Programmierung zu ermöglichen, besteht in .NET die Möglichkeit, über platform invoke Systembefehle und unmanaged code aufzurufen, ähnlich Javas JNI.
+
+Geschwindigkeitskritische Programmteile können in C# in sogenanntem unsicherem unsafe code geschrieben werden, was ähnlich zu Inline-Assembler in C-Programmen zu sehen ist. Java kennt hierfür keine Entsprechung.
+
+Entwicklungsumgebungen
+
+Es gibt eine große Vielfalt von Entwicklungsumgebungen für Java, sowohl kommerzielle als auch freie (Open Source). Die meisten Entwicklungsumgebungen für Java sind selbst ebenfalls in Java geschrieben.
+
+Die bekanntesten Open-Source-Umgebungen sind das von der Eclipse Foundation bereitgestellte Eclipse und das von Sun entwickelte NetBeans.
+
+Unter den kommerziellen Entwicklungsumgebungen sind das auf Netbeans basierende Sun ONE Studio von Sun, IntelliJ IDEA von JetBrains, JBuilder von Borland sowie JCreator am verbreitetsten. Außerdem gibt es noch eine, um einige hundert Plugins erweiterte Version von Eclipse, die von IBM unter dem Namen WebSphere Studio Application Developer („WSAD“) vertrieben wurde und seit Version 6.0 Rational Application Developer („RAD“) heißt.
+
+Apple liefert mit Mac OS X ab Version 10.3 die Entwicklungsumgebung Xcode aus, die verschiedene Programmiersprachen unterstützt und einen Schwerpunkt auf Java setzt. Xcode wird mit jedem Apple (-Betriebssystem) mitgeliefert, Aktualisierungen sind darüber hinaus nach Registrierung für jedermann kostenlos erhältlich.
+
+Wer lieber einen Texteditor verwendet, findet in Emacs zusammen mit der JDEE (Java Development Environment for Emacs) ein mächtiges Werkzeug. Ein vielseitiger und erweiterbarer in Java geschriebener Editor ist jEdit. Für andere Editoren wie Vim, Jed oder Textpad gibt es ebenfalls entsprechende Modi.
+
+Compiler
+
+Ein Java-Compiler übersetzt Java-Quellcode (Dateiendung .java) in einen ausführbaren Code. Grundsätzlich unterscheidet man zwischen Bytecode- und Nativecode-Compilern. Einige Java-Laufzeitumgebungen verwenden einen JIT-Compiler, um zur Laufzeit den Bytecode häufig genutzter Programmteile in nativen Maschinencode zu übersetzen.
+
+Bytecode-Compiler
+
+Im Normalfall übersetzt der Java-Compiler die Programme in einen nicht direkt ausführbaren Bytecode (Dateiendung .class), den die Java Runtime Environment (JRE) später ausführt. Die aktuelle HotSpot-Technologie kompiliert den Bytecode zur Laufzeit in nativen Prozessorcode und optimiert diesen abhängig von der verwendeten Plattform. Diese Optimierung findet dabei nach und nach statt, so dass der Effekt auftritt, dass Programmteile nach mehrmaliger Abarbeitung schneller werden. Auf der anderen Seite führt diese Technologie, die ein Nachfolger der Just-In-Time-Compilierung ist, dazu, dass Java-Bytecode theoretisch genau so schnell wie native, kompilierte Programme ausgeführt werden könnte.
+
+Die HotSpot-Technologie ist seit der JRE Version 1.3 verfügbar und wurde seitdem stetig weiter verbessert.
+
+    * javac (Teil des JDK) von Sun Microsystems
+    * Jikes von IBM
+
+Native Compiler
+
+Es existieren auch Compiler für Java, die Java-Quelltexte oder Java-Bytecode in normalen Maschinencode übersetzen können, sogenannte Ahead-Of-Time-Compiler. Nativ kompilierte Programme haben den Vorteil, keine JavaVM mehr zu benötigen, aber auch den Nachteil, nicht mehr plattformunabhängig zu sein.
+
+    * GNU Compiler for Java (GCJ)
+          o MinGW
+          o Cygwin
+          o JNC – JavaNativeCompiler Eine GUI, Erweiterungen und vorkompilierte Binaries.
+    * Excelsior JET
+
+Wrapper
+
+Ein Wrapper (in diesem Zusammenhang) ist ein ausführbares Programm, das als Ersatz für ein Java Archive (Dateiendung .jar) dient. Er sucht selbstständig nach einer installierten Java-Laufzeitumgebung, um das Programm zu starten, und informiert den Benutzer darüber, wo er eine Laufzeitumgebung herunterladen kann, sofern noch keine installiert ist. Es ist also immer noch eine Laufzeitumgebung nötig, um das Programm starten zu können.
+
+Java Web Start ist ein etwas eleganterer Ansatz für diese Problematik – er ermöglicht die einfache Aktivierung von Anwendungen mit einem einzigen Mausklick und garantiert, dass immer die neueste Version der Anwendung ausgeführt wird. Dadurch werden komplizierte Installations- oder Aktualisierungsprozeduren vermieden.
+
+    * JSmooth (Lizenz: GPL)
+    * Launch4J (Lizenz: GPL)
+    * JBuilder von Borland und NSIS (Java Launcher) sind ebenfalls in der Lage, einen Wrapper für Windows zu erstellen
+ 

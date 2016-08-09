@@ -1,0 +1,5 @@
+Ein weiterer Test, der in einem inneren Ordner steht. 
+Hier wird aber auch mal ausprobiert, ob Ihr Programm 
+alle Zeilen und nicht nur die erste einliest.
+Und wie es damit umgeht, wenn die Datei mit einem 
+Wort und nicht mit einem Satz- oder Leerzeichen endet
