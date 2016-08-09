@@ -9,7 +9,9 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -26,7 +28,8 @@ public class SearchEngineClass implements ISearchEngine {
 	
 	public List<File> includedFiles = new ArrayList<>();
 	
-	public List<String> indexedWords;
+	//public List<String> indexedWords;
+	public HashMap<String, File> indexedWords;
 	
 	
 	
@@ -46,12 +49,21 @@ public class SearchEngineClass implements ISearchEngine {
 	@Override
 	public List<IResult> search(String text) {
 		// TODO Auto-generated method stub
-		System.out.println("\n Suche gestartet: "+ indexedWords.size()+ " " + text);
+		System.out.println("\n Suche gestartet: "+ indexedWords.size() + " " + text);
 		
 		// Prüfe, ob das eine Phrasensuche ist oder nicht
 		if(text.contains("\"")){
 			System.out.println("\n Suche ist Phrase ");
-		}else{
+			
+		} else {
+			// Split each word from textfield {@link AbstractSearchEngineFrame#searchField} , use blank spaces 
+			// as delimiter
+			// @see: http://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space			
+			String[] splitted = text.split("\\s+");
+			for(int i=0; i < splitted.length; i++) {
+				System.out.println(splitted[i]);
+				
+			}
 			System.out.println("\n Suche ist Keyword ");
 			
 		}
@@ -119,11 +131,13 @@ public class SearchEngineClass implements ISearchEngine {
 				
 			}
 			
+			//Alle Duplikate und leere Elemente aus der Liste rauswerfen 
 			Set<File> DD = new HashSet<>();
 			DD.addAll(files);
 			files.clear();
 			files.addAll(DD); 
 			System.out.println("files size "+files.size());
+			
 			try {
 				this.indexedWords = getIndexedTokens(files);
 				
@@ -146,7 +160,9 @@ public class SearchEngineClass implements ISearchEngine {
 
 	@Override
 	public void deleteIndex() throws SearchEngineException {
-		this.indexDir = null;		
+		
+		this.indexDir = null;
+		this.includedFiles.clear();
 	}
 	
 	
@@ -194,33 +210,39 @@ public class SearchEngineClass implements ISearchEngine {
 	}
 	
 	
-	private List<String> getIndexedTokens(List<File> files) throws IOException {
+	private HashMap<String, File> getIndexedTokens(List<File> files) throws IOException {
 		
-		List<String> words = new ArrayList<String>();
+		//List<String> words = new ArrayList<String>();
+		HashMap<String, File> words = new HashMap<>();
 		
 		
 		for (int i=0; i < files.size(); i++) {
 			
 			String text = getText(files.get(i), this.ENCODING); //System.out.println(text);		
 
-			// Wir holen eine Instanz eines BreakIterators, der auf Wortebene den
-			// Eingabetext "text" tokenisiert und setzen den sprachlichen Kontext.
+			// Eine Instanz des BreakIterators, der auf Wortebene den
+			// Text tokenisiert und den sprachlichen Kontext setzt.
 			BreakIterator iterator = BreakIterator.getWordInstance(Locale.GERMAN);
-			iterator.setText(text); // Wir setzen den zu scannenden Text
+			iterator.setText(text); 
 			int start = iterator.first();
 			int end = iterator.next();
 			
 			while (end != BreakIterator.DONE) {
 				String subStringFromText = text.substring(start, end);
 					
-				words.add(subStringFromText);
+				//words.add(subStringFromText);
+				words.put(subStringFromText, files.get(i));
 					
 				start = end;
 				end = iterator.next();
 			}
-		    
-		} //System.out.println("\n" + words);		
+		} 	
+		/*for (String key : words.keySet()) {
+			System.out.println("Key:" + key + "\n Value: " + words.get(key));
+			
+		} */
 		
+				
 		return words;
 	}
 	
