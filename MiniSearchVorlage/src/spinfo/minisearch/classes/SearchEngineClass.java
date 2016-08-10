@@ -205,7 +205,7 @@ public class SearchEngineClass implements ISearchEngine {
 			
 		}	
 		
-		//System.out.println("\n" + includedFiles + includedFiles.size());
+		
 		return includedFiles;
 	}
 	

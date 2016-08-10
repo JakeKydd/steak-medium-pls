@@ -34,6 +34,7 @@ public class ResultClass implements IResult{
 
 	@Override
 	public String getAbsoluteDocumentPath() {
+		// This will change to the file object given by the IResult Object
 		File file = new File("c:\\HaxLogs.txt");
 
 		System.out.println("Absoluter Pfad : " + file.getAbsolutePath());
@@ -44,6 +45,7 @@ public class ResultClass implements IResult{
 	@Override
 	public long getLastModified() {
 		// TODO Auto-generated method stub
+		// This will change to the file object given by the IResult Object
 		File file = new File("c:\\HaxLogs.txt");
 
 		System.out.println("Zuletzt geändert : " + file.lastModified());
@@ -53,6 +55,7 @@ public class ResultClass implements IResult{
 	@Override
 	public long getSize() {
 		// TODO Auto-generated method stub
+		// This will change to the file object given by the IResult Object
 		File file = new File("c:\\HaxLogs.txt");
 
 		System.out.println("Datengröße in bytes : " + file.length());
