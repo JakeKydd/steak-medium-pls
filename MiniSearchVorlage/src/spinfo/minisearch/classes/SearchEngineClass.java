@@ -42,7 +42,7 @@ public class SearchEngineClass implements ISearchEngine {
 		
 	}
 
-	//hallo
+	
 	@Override
 	public List<IResult> search(String text) {
 		// TODO Auto-generated method stub
