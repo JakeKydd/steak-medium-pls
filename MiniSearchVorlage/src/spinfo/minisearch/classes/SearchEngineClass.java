@@ -45,7 +45,7 @@ public class SearchEngineClass implements ISearchEngine {
 		
 	}
 
-	//hallo
+	
 	@Override
 	public List<IResult> search(String text) {
 		// TODO Auto-generated method stub
@@ -56,6 +56,7 @@ public class SearchEngineClass implements ISearchEngine {
 			System.out.println("\n Suche ist Phrase ");
 			
 		} else {
+			// Hello 
 			// Split each word from textfield {@link AbstractSearchEngineFrame#searchField} , use blank spaces 
 			// as delimiter
 			// @see: http://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space			
@@ -205,6 +206,7 @@ public class SearchEngineClass implements ISearchEngine {
 			
 		}	
 		
+		
 		return includedFiles;
 	}
 	
@@ -235,8 +237,8 @@ public class SearchEngineClass implements ISearchEngine {
 				start = end;
 				end = iterator.next();
 			}
-		}/* 	
-		for (String key : words.keySet()) {
+		} 	
+		/*for (String key : words.keySet()) {
 			System.out.println("Key:" + key + "\n Value: " + words.get(key));
 			
 		} */
