@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,15 +26,21 @@ import spinfo.minisearch.exeption.*;
 
 public class SearchEngineClass implements ISearchEngine {
 	
+	
+	
 	private File indexDir = null;
 	
 	public List<File> includedFiles = new ArrayList<>();
+	
+	public List<IResult> resultFiles;
 	
 	//public List<String> indexedWords;
 	public HashMap<String, File> indexedWords;
 	
 	
-	Preferences prefs = Preferences.getInstance();	
+	Preferences prefs = Preferences.getInstance();
+	
+	Comparable<IResult> result;
 			
 	
 	/**
@@ -43,35 +51,45 @@ public class SearchEngineClass implements ISearchEngine {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<IResult> search(String text) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("\n Suche gestartet: "+ indexedWords.size() + " " + text);
+		
+		resultFiles = new ArrayList<>();
+		
+		
 		
 		// Prüfe, ob das eine Phrasensuche ist oder nicht
 		if(text.contains("\"")){
 			System.out.println("\n Suche ist Phrase ");
 			
 		} else {
-			// Hello 
+			
+			
 			// Split each word from textfield {@link AbstractSearchEngineFrame#searchField} , use blank spaces 
 			// as delimiter
 			// @see: http://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space			
 			String[] splitted = text.split("\\s+");
-			for(int i=0; i < splitted.length; i++) {
-				System.out.println(splitted[i]);
+			for (int i=0; i < splitted.length; i++) {
+					
+				if (indexedWords.containsKey(splitted[i])) {
+					System.out.println("Wort" + splitted[i] + " kommt vor in: " + indexedWords.get(splitted[i]));
+					resultFiles.addAll((Collection<? extends IResult>) indexedWords.get(splitted[i]));
+										
+				}
 				
 			}
 			System.out.println("\n Suche ist Keyword ");
 			
 		}
-		return null;
+		return resultFiles;
 	}
 
 	@Override
 	public void updateAll() {
-		// TODO Auto-generated method stub
-		
+				
 	}
 
 	@Override
@@ -134,7 +152,7 @@ public class SearchEngineClass implements ISearchEngine {
 			DD.addAll(files);
 			files.clear();
 			files.addAll(DD); 
-			System.out.println("files size "+files.size());
+			//System.out.println("files size "+files.size());
 			
 			try {
 				this.indexedWords = getIndexedTokens(files);
@@ -191,7 +209,7 @@ public class SearchEngineClass implements ISearchEngine {
 				
 				if (files[i].getName().endsWith(".txt")) {			
 					this.includedFiles.add(files[i]);
-					System.out.println("\n" + files[i].getName() +" added. ");
+					//System.out.println("\n" + files[i].getName() +" added. ");
 				}				
 				
 			}				
@@ -229,11 +247,12 @@ public class SearchEngineClass implements ISearchEngine {
 				start = end;
 				end = iterator.next();
 			}
-		} 	
+		} 
+		/* 	
 		for (String key : words.keySet()) {
 			System.out.println("Key:" + key + "\n Value: " + words.get(key));
 			
-		}
+		} */
 		
 				
 		return words;
@@ -264,5 +283,8 @@ public class SearchEngineClass implements ISearchEngine {
 		br.close();
 		return stringBuffer.toString();
 	}
+
+
+	
 
 }
