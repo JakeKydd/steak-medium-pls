@@ -32,11 +32,8 @@ public class SearchEngineClass implements ISearchEngine {
 	public HashMap<String, File> indexedWords;
 	
 	
-	
-	Preferences prefs = Preferences.getInstance();
-	
-	private final static String ENCODING = "UTF-8";
-		
+	Preferences prefs = Preferences.getInstance();	
+			
 	
 	/**
 	 * Constructor of SearchEngineClass - overwrites the default constructor
@@ -181,10 +178,8 @@ public class SearchEngineClass implements ISearchEngine {
 	 */
 	public List<File> getFilesFromIndex(List<File> includedFiles,File directory) {
 		
-		//this.includedFiles = new ArrayList<>();
 		File[] files = directory.listFiles();
-		
-		
+				
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {				
 				
@@ -197,12 +192,9 @@ public class SearchEngineClass implements ISearchEngine {
 				if (files[i].getName().endsWith(".txt")) {			
 					this.includedFiles.add(files[i]);
 					System.out.println("\n" + files[i].getName() +" added. ");
-				}
+				}				
 				
-				
-			}
-			
-				
+			}				
 			
 		}	
 		
@@ -219,7 +211,7 @@ public class SearchEngineClass implements ISearchEngine {
 		
 		for (int i=0; i < files.size(); i++) {
 			
-			String text = getText(files.get(i), this.ENCODING); //System.out.println(text);		
+			String text = getText(files.get(i), PredefinedVars.ENCODING);		
 
 			// Eine Instanz des BreakIterators, der auf Wortebene den
 			// Text tokenisiert und den sprachlichen Kontext setzt.
@@ -238,17 +230,26 @@ public class SearchEngineClass implements ISearchEngine {
 				end = iterator.next();
 			}
 		} 	
-		/*for (String key : words.keySet()) {
+		for (String key : words.keySet()) {
 			System.out.println("Key:" + key + "\n Value: " + words.get(key));
 			
-		} */
+		}
 		
 				
 		return words;
 	}
 	
-	
-	private static String getText(File file, String encoding)
+	/**
+	 * Mit der Methode getText wird der Inhalt einer Datei ausgelesen
+	 * 
+	 * @param file   Dateiname
+	 * @param encoding  
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static String getText(File file, String encoding)
 			throws UnsupportedEncodingException, FileNotFoundException,
 			IOException {
 		
