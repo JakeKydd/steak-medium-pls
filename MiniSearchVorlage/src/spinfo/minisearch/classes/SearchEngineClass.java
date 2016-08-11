@@ -205,7 +205,6 @@ public class SearchEngineClass implements ISearchEngine {
 			
 		}	
 		
-		//System.out.println("\n" + includedFiles + includedFiles.size());
 		return includedFiles;
 	}
 	
@@ -236,8 +235,8 @@ public class SearchEngineClass implements ISearchEngine {
 				start = end;
 				end = iterator.next();
 			}
-		} 	
-		/*for (String key : words.keySet()) {
+		}/* 	
+		for (String key : words.keySet()) {
 			System.out.println("Key:" + key + "\n Value: " + words.get(key));
 			
 		} */
