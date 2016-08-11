@@ -56,6 +56,7 @@ public class SearchEngineClass implements ISearchEngine {
 			System.out.println("\n Suche ist Phrase ");
 			
 		} else {
+			// Hello 
 			// Split each word from textfield {@link AbstractSearchEngineFrame#searchField} , use blank spaces 
 			// as delimiter
 			// @see: http://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space			
