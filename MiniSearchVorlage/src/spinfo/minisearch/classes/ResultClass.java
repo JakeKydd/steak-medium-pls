@@ -56,7 +56,11 @@ public class ResultClass implements IResult{
 	public File getFilename() {
 		return filename;
 	}
-	
+	/**
+	 * getSearchKeyword
+	 * Gibt das Suchwort zurück
+	 * @return  search
+	 */
 	public String getSearchKeyword() {
 		return search;
 	}
@@ -69,6 +73,11 @@ public class ResultClass implements IResult{
 	public void setFilename(File filename) {
 		this.filename = filename;
 	}
+	/**
+	 * setSearchKeyword
+	 * weist der Variablen search einen Wert zu
+	 * @param search Suchterm
+	 */
 	public void setSearchKeyword(String search) {
 		this.search = search;
 	}
@@ -133,34 +142,20 @@ public class ResultClass implements IResult{
 
 	@Override
 	public String getAbsoluteDocumentPath() {
-		// This will change to the file object given by the IResult Object
-		//File file = FileSelected;
-
-		//System.out.println("Absoluter Pfad : " + file.getAbsolutePath());
-		//return FileSelected.getAbsolutePath();
+		
 		return this.filename.getAbsolutePath();
 		
 	}
 
 	@Override
 	public long getLastModified() {
-		// TODO Auto-generated method stub
-		// This will change to the file object given by the IResult Object
-		//File file = FileSelected;
-
-		//System.out.println("Zuletzt geändert : " + file.lastModified());
-		//return file.lastModified();
+		
 		return this.filename.lastModified();
 	}
 
 	@Override
 	public long getSize() {
-		// TODO Auto-generated method stub
-		// This will change to the file object given by the IResult Object
-		//File file = FileSelected;
-
-		//System.out.println("Datengröße in bytes : " + file.length());
-		//return file.length();
+		
 		return this.filename.length();
 	}
 	
