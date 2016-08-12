@@ -79,11 +79,13 @@ public class SearchEngineFrame extends AbstractSearchEngineFrame {
 	}
     
     protected void setResults(List<IResult> documents) {
+    	
        super.resultsTable.setModel(new ResultsTableModel(documents));
        if(documents.size() == 0) {
     	   super.summaryLabel.setText("Ihre Suche lieferte keine Ergebnisse");
        } else {
     	   super.summaryLabel.setText("Ihre Suche lieferte " + documents.size() + " Ergebnisse");
+    	   
        }
     }
 

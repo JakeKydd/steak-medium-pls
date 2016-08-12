@@ -55,7 +55,7 @@ public class SearchEngineClass implements ISearchEngine {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<IResult> search(String text) {
-		
+		resultFiles.clear();
 		System.out.println("\n Suche gestartet: "+ indexedWords.size() + " " + text);		
 			
 		// Prüfe, ob das eine Phrasensuche ist oder nicht
