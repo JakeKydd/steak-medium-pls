@@ -20,6 +20,9 @@ import spinfo.minisearch.gui.SearchEngineFrame;
  */
 public interface IResult extends Comparable<IResult>{
 
+	public final File filename = null;
+	
+	
 	/**
 	 * Gibt den absoluten Pfad zu einem gefundenen Dokument zurück.
 	 * @see File#getAbsolutePath()

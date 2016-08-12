@@ -7,14 +7,63 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import spinfo.minisearch.exeption.SearchEngineException;
 import spinfo.minisearch.interfaces.IResult;
+import spinfo.minisearch.util.Preferences;
 
 public class ResultClass implements IResult{
 
-	private File FileSelected = null; 
+	private static final long serialVersionUID = -4984707036913993459L;
+	
+	private static ResultClass instance;
+	
+	private File FileSelected = null;
+		
+	private File filename;
+	
+	/**
+	 * constructor with parameter filename
+	 * @param filename
+	 */
+	public ResultClass(File filename) {
+		this.filename = filename;
+	}
+
+	// empty constructor
+	public ResultClass() {		
+	}
+	
+	/**
+	 * Singleton-Instanz
+	 * @return die Singleton-Instanz von {@link ResultClass}
+	 */
+	public static ResultClass getInstance() {
+		if(instance == null) {
+			instance = new ResultClass();
+		}
+		return instance;
+	}
+	
+	/**
+	 * getFilename
+	 * Gibt den Dateinamen zurück
+	 * @return  filename
+	 */
+	public File getFilename() {
+		return filename;
+	}
+
+	/**
+	 * setFilename
+	 * weist der Variablen filename einen Wert zu
+	 * @param filename Dateiname
+	 */
+	public void setFilename(File filename) {
+		this.filename = filename;
+	}
 
 	@Override
 	public int compareTo(IResult arg0) {
@@ -60,10 +109,11 @@ public class ResultClass implements IResult{
 	@Override
 	public String getAbsoluteDocumentPath() {
 		// This will change to the file object given by the IResult Object
-		File file = FileSelected;
+		//File file = FileSelected;
 
-		System.out.println("Absoluter Pfad : " + file.getAbsolutePath());
-		return file.getAbsolutePath();
+		//System.out.println("Absoluter Pfad : " + file.getAbsolutePath());
+		//return FileSelected.getAbsolutePath();
+		return this.filename.getAbsolutePath();
 		
 	}
 
@@ -71,20 +121,22 @@ public class ResultClass implements IResult{
 	public long getLastModified() {
 		// TODO Auto-generated method stub
 		// This will change to the file object given by the IResult Object
-		File file = FileSelected;
+		//File file = FileSelected;
 
-		System.out.println("Zuletzt geändert : " + file.lastModified());
-		return file.lastModified();
+		//System.out.println("Zuletzt geändert : " + file.lastModified());
+		//return file.lastModified();
+		return this.filename.lastModified();
 	}
 
 	@Override
 	public long getSize() {
 		// TODO Auto-generated method stub
 		// This will change to the file object given by the IResult Object
-		File file = FileSelected;
+		//File file = FileSelected;
 
-		System.out.println("Datengröße in bytes : " + file.length());
-		return file.length();
+		//System.out.println("Datengröße in bytes : " + file.length());
+		//return file.length();
+		return this.filename.length();
 	}
 	
 	private static String getText(File file, String encoding)

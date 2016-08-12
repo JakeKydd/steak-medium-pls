@@ -32,7 +32,7 @@ public class SearchEngineClass implements ISearchEngine {
 	
 	public List<File> includedFiles = new ArrayList<>();
 	
-	public List<IResult> resultFiles;
+	public List<IResult> resultFiles = new ArrayList<>();
 	
 	//public List<String> indexedWords;
 	public HashMap<String, File> indexedWords;
@@ -40,14 +40,15 @@ public class SearchEngineClass implements ISearchEngine {
 	
 	Preferences prefs = Preferences.getInstance();
 	
+	ResultClass res = ResultClass.getInstance();
+	
 	Comparable<IResult> result;
 			
 	
 	/**
 	 * Constructor of SearchEngineClass - overwrites the default constructor
 	 */
-	public SearchEngineClass() {
-		
+	public SearchEngineClass() {		
 	}
 
 	
@@ -55,12 +56,8 @@ public class SearchEngineClass implements ISearchEngine {
 	@Override
 	public List<IResult> search(String text) {
 		
-		System.out.println("\n Suche gestartet: "+ indexedWords.size() + " " + text);
-		
-		resultFiles = new ArrayList<>();
-		
-		
-		
+		System.out.println("\n Suche gestartet: "+ indexedWords.size() + " " + text);		
+			
 		// Prüfe, ob das eine Phrasensuche ist oder nicht
 		if(text.contains("\"")){
 			System.out.println("\n Suche ist Phrase ");
@@ -76,14 +73,16 @@ public class SearchEngineClass implements ISearchEngine {
 					
 				if (indexedWords.containsKey(splitted[i])) {
 					System.out.println("Wort" + splitted[i] + " kommt vor in: " + indexedWords.get(splitted[i]));
-					resultFiles.addAll((Collection<? extends IResult>) indexedWords.get(splitted[i]));
-										
+					res.setFilename(indexedWords.get(splitted[i]));
+					
+					//resultFiles.addAll((Collection<? extends IResult>) indexedWords.get(splitted[i]));
+					resultFiles.add((IResult) res);									
 				}
 				
 			}
 			System.out.println("\n Suche ist Keyword ");
 			
-		}
+		} 
 		return resultFiles;
 	}
 
