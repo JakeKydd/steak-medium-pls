@@ -75,7 +75,24 @@ public class ResultClass implements IResult{
 	@Override
 	public int getNumberOfOccurrences() {
 		// TODO Auto-generated method stub
-		return 0;
+		Integer Occurence = 0;
+		String search = "Bild";
+		try {
+			
+			String txt_inhalt = getText(this.filename,PredefinedVars.ENCODING);
+			String[] splitted = txt_inhalt.toLowerCase().split("\\s+");
+			for (int i=0; i < splitted.length; i++) {
+					
+				if (splitted[i].contains(search.toLowerCase())) {
+					Occurence++;				
+				}
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Occurence;
 	}
 
 	@Override
