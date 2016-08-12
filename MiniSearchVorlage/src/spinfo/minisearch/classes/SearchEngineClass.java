@@ -74,6 +74,7 @@ public class SearchEngineClass implements ISearchEngine {
 				if (indexedWords.containsKey(splitted[i])) {
 					System.out.println("Wort" + splitted[i] + " kommt vor in: " + indexedWords.get(splitted[i]));
 					res.setFilename(indexedWords.get(splitted[i]));
+					res.setSearchKeyword(text.toLowerCase());
 					
 					//resultFiles.addAll((Collection<? extends IResult>) indexedWords.get(splitted[i]));
 					resultFiles.add((IResult) res);									

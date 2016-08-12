@@ -20,16 +20,17 @@ public class ResultClass implements IResult{
 	
 	private static ResultClass instance;
 	
-	private File FileSelected = null;
 		
 	private File filename;
+	
+	private String search;
 	
 	/**
 	 * constructor with parameter filename
 	 * @param filename
 	 */
 	public ResultClass(File filename) {
-		this.filename = filename;
+		this.filename = filename;		
 	}
 
 	// empty constructor
@@ -55,6 +56,10 @@ public class ResultClass implements IResult{
 	public File getFilename() {
 		return filename;
 	}
+	
+	public String getSearchKeyword() {
+		return search;
+	}
 
 	/**
 	 * setFilename
@@ -63,6 +68,9 @@ public class ResultClass implements IResult{
 	 */
 	public void setFilename(File filename) {
 		this.filename = filename;
+	}
+	public void setSearchKeyword(String search) {
+		this.search = search;
 	}
 
 	@Override
@@ -76,14 +84,14 @@ public class ResultClass implements IResult{
 	public int getNumberOfOccurrences() {
 		// TODO Auto-generated method stub
 		Integer Occurence = 0;
-		String search = "Bild";
+		
 		try {
 			
 			String txt_inhalt = getText(this.filename,PredefinedVars.ENCODING);
 			String[] splitted = txt_inhalt.toLowerCase().split("\\s+");
 			for (int i=0; i < splitted.length; i++) {
 					
-				if (splitted[i].contains(search.toLowerCase())) {
+				if (splitted[i].contains(this.search.toLowerCase())) {
 					Occurence++;				
 				}
 				
@@ -102,7 +110,7 @@ public class ResultClass implements IResult{
 		String txt_inhalt = null;
 		
 		try {
-			txt_inhalt = getText(FileSelected, PredefinedVars.ENCODING);
+			txt_inhalt = getText(this.filename, PredefinedVars.ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
