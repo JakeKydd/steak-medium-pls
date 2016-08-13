@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import spinfo.minisearch.exeption.SearchEngineException;
@@ -24,6 +27,8 @@ public class ResultClass implements IResult{
 	private File filename;
 	
 	private String search;
+	
+	private String text_inhalt;
 	
 	/**
 	 * constructor with parameter filename
@@ -64,6 +69,14 @@ public class ResultClass implements IResult{
 	public String getSearchKeyword() {
 		return search;
 	}
+	/**
+	 * getTextInhalt
+	 * Gibt den gefundenen Inhalt zurück
+	 * @return  text_inhalt
+	 */
+	public String getTextInhalt() {
+		return text_inhalt;
+	}
 
 	/**
 	 * setFilename
@@ -80,6 +93,14 @@ public class ResultClass implements IResult{
 	 */
 	public void setSearchKeyword(String search) {
 		this.search = search;
+	}
+	/**
+	 * setTextInhalt
+	 * weist der Variablen text_inhalt den Inhalt der Textdatei zu
+	 * @param text_inhalt Textueller Inhalt
+	 */
+	public void setTextInhalt(String text_inhalt) {
+		this.text_inhalt = text_inhalt;
 	}
 
 	@Override
@@ -116,10 +137,11 @@ public class ResultClass implements IResult{
 	public String getContent() throws SearchEngineException {
 		// TODO Auto-generated method stub
 		
+		this.text_inhalt = null;
 		String txt_inhalt = null;
 		
 		try {
-			txt_inhalt = getText(this.filename, PredefinedVars.ENCODING);
+			this.text_inhalt = getText(this.filename, PredefinedVars.ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,14 +152,32 @@ public class ResultClass implements IResult{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}	
+		txt_inhalt = this.text_inhalt;
 		return txt_inhalt;
 	}
 
 	@Override
 	public Map<Integer, Integer> getHighlightedPositions() {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Auto-generated method stub		
+		List<Integer> MarkBeginn = new ArrayList<>();
+		List<Integer> MarkEnd = new ArrayList<>();		
+		
+		for (int i = -1; (i = this.text_inhalt.toLowerCase().indexOf(this.search.toLowerCase(), i + 1)) != -1; ) {
+		    MarkBeginn.add(i);		    
+		} 
+		
+		for (int i = this.text_inhalt.length(); (i = this.text_inhalt.toLowerCase().lastIndexOf(this.search.toLowerCase(), i - 1)) != -1; ) {
+		    MarkEnd.add(i);		    
+		}
+		
+		Collections.reverse(MarkEnd);
+		Map<Integer, Integer> Highlights = new HashMap<Integer, Integer>();
+		
+		for (int i = 0; i < MarkBeginn.size(); i++) {			
+				Highlights.put(MarkBeginn.get(i),MarkEnd.get(i));			
+		}		
+		return Highlights;
 	}
 
 	@Override
