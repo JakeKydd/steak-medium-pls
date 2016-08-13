@@ -151,10 +151,10 @@ public class SearchEngineFrame extends AbstractSearchEngineFrame {
 			Document newDoc = new DefaultStyledDocument();
 			newDoc.insertString(0, details.getContent(), null);
 			resultDetails.setDocument(newDoc);
-			hightlightText(details);
+			//hightlightText(details);
 		} catch (Exception e) {
 			super.resultDetails.setText("");
-			JOptionPane.showConfirmDialog(this, e.getMessage(), "Ein Fehler ist aufgetreten", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showConfirmDialog(this, "Message: "+e.getMessage(), "Ein Fehler ist aufgetreten", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
