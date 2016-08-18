@@ -161,14 +161,15 @@ public class ResultClass implements IResult{
 	public Map<Integer, Integer> getHighlightedPositions() {
 		// TODO Auto-generated method stub		
 		List<Integer> MarkBeginn = new ArrayList<>();
-		List<Integer> MarkEnd = new ArrayList<>();		
+		List<Integer> MarkEnd = new ArrayList<>();
 		
+						
 		for (int i = -1; (i = this.text_inhalt.toLowerCase().indexOf(this.search.toLowerCase(), i + 1)) != -1; ) {
 		    MarkBeginn.add(i);		    
-		} 
+		}  
 		
 		for (int i = this.text_inhalt.length(); (i = this.text_inhalt.toLowerCase().lastIndexOf(this.search.toLowerCase(), i - 1)) != -1; ) {
-		    MarkEnd.add(i);		    
+		   	MarkEnd.add(i + this.search.length()-1);		    
 		}
 		
 		Collections.reverse(MarkEnd);
@@ -176,7 +177,7 @@ public class ResultClass implements IResult{
 		
 		for (int i = 0; i < MarkBeginn.size(); i++) {			
 				Highlights.put(MarkBeginn.get(i),MarkEnd.get(i));			
-		}		
+		}
 		return Highlights;
 	}
 
