@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.BreakIterator;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -87,15 +88,61 @@ public class SearchEngineClass implements ISearchEngine {
 		return resultFiles;
 	}
 
+	/**
+	 * updateAll-Methode wird aufgerufen, wenn der User im Programm-Menu 'index neu aufbauen' aufruft.
+	 * Dabei werden alle bisherigen Eintraege in der Liste entfernt und neu generiert.
+	 * Wird eine Datei geloescht oder neu hinzugefuegt, so wird dies mit beruecksichtigt, und der
+	 * Eintrag ist entweder neu hinzugekommen oder enfernt. 
+	 * Dabei wird die Methode {@link ISearchEngine#getFilesFromIndex(includedFiles, file)} aufgerufen.
+	 * Event wird durch den User getriggert
+	 * @return void
+	 */
 	@Override
 	public void updateAll() {
+		
+		long currentTime = System.currentTimeMillis();		
+			
+		// aktuelle Directories aus den Settings		
+		List<File> directories = prefs.getDirectories();
+				
+		List<File> files = new ArrayList<File>();
+		String filepath = "";
+		
+		//aktuelle Eintraege entfernen aus Liste
+		this.includedFiles.clear();
+		
+		if (directories != null) {
+			for (File datei : directories) {
+				
+				filepath = datei.getAbsolutePath();
+				this.indexDir = new File(filepath);	
+				
+				
+				files = getFilesFromIndex(includedFiles,datei);
+				
+			}
+		} 
+		
+		//Alle Duplikate und leere Elemente aus der Liste rauswerfen 
+		Set<File> DD = new HashSet<>();
+		DD.addAll(files);
+		files.clear();
+		files.addAll(DD); 
+		
+		System.out.println(this.includedFiles);
+		
+		//Überprüfen, ob das lastModified-Datum > Systemzeit ist
+		
+		//Check if there are more files (new added) or less files (deleted) in the directory
 				
 	}
 
 	@Override
 	public void update(List<File> addedDirectories, List<File> removedDirectories) throws SearchEngineException {
 		
-				
+		//addedDirectories not empty or null
+		//removedDirectories not empty or null
+						
 	}
 
 	/**
@@ -191,7 +238,8 @@ public class SearchEngineClass implements ISearchEngine {
 	/**
 	 * Diese Methode durchsucht das Index-Verzeichnis und liefert alle
 	 * Dateien, die darin vorkommen zurück als Liste. Die Ordner werden rekursiv durchsucht.
-	 * @param  directory  Index-Verzeichnis
+	 * @param  includedFiles  Index-Verzeichnis
+	 * @param  directory      
 	 * @return includedFiles  alle Dateien die im Index-Verzeichnis sind
 	 */
 	public List<File> getFilesFromIndex(List<File> includedFiles,File directory) {
