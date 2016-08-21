@@ -146,9 +146,10 @@ public class SearchEngineClass implements ISearchEngine {
 
 	
 	/**
-	 * Wird aufgerufen, wenn der Benutzer im 'Einstellungen'-Dialog ein neues Verzeichnis hinzufügt oder
-	 * ein bestehendes Verzeichnis entfernt. Dieses wird dann in den Index hinzugefügt oder entfernt.
-	 * Übergebenen Parameter (List<File>) sind niemals <code>null</code>, sondern höchstens leer.
+	 * Wird aufgerufen, wenn der Benutzer im "Einstellungen"-Dialog ein neues Verzeichnis hinzufügt oder
+	 * ein bestehendes Verzeichnis entfernt und "ok"-Button klickt. Dieses wird dann in den 
+	 * Index hinzugefügt oder entfernt.
+	 * Übergebene Parameter (List<File>) sind niemals <code>null</code>, sondern höchstens leer.
 	 * @param addedDirectories    Liste der neu hinzugefügten Verzeichnisse.
 	 * @param removedDirectories  Liste der entfernten Verzeichnisse.
 	 * @throws SearchEngineException
