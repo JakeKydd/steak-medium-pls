@@ -31,6 +31,8 @@ public class SearchEngineClass implements ISearchEngine {
 	
 	private File indexDir = null;
 	
+	private List<File> indexedDirectories = new ArrayList<>();
+	
 	public List<File> includedFiles = new ArrayList<>();
 	
 	public List<IResult> resultFiles = new ArrayList<>();
@@ -43,7 +45,8 @@ public class SearchEngineClass implements ISearchEngine {
 	
 	ResultClass res = ResultClass.getInstance();
 	
-	Comparable<IResult> result;
+	Comparable<IResult> result;	
+	
 			
 	
 	/**
@@ -100,8 +103,6 @@ public class SearchEngineClass implements ISearchEngine {
 	@Override
 	public void updateAll() {
 		
-		long currentTime = System.currentTimeMillis();		
-			
 		// aktuelle Directories aus den Settings		
 		List<File> directories = prefs.getDirectories();
 				
@@ -109,14 +110,16 @@ public class SearchEngineClass implements ISearchEngine {
 		String filepath = "";
 		
 		//aktuelle Eintraege entfernen aus Liste
-		this.includedFiles.clear();
+		if (this.includedFiles.size() > 0) {
+			System.out.println("Index wird serialisiert!");
+			this.includedFiles.clear();
+		}
 		
 		if (directories != null) {
 			for (File datei : directories) {
 				
 				filepath = datei.getAbsolutePath();
-				this.indexDir = new File(filepath);	
-				
+				this.indexDir = new File(filepath);				
 				
 				files = getFilesFromIndex(includedFiles,datei);
 				
@@ -130,18 +133,46 @@ public class SearchEngineClass implements ISearchEngine {
 		files.addAll(DD); 
 		
 		System.out.println(this.includedFiles);
+		for (int i=0; i < this.includedFiles.size(); i++) {
+			try {
+				start(includedFiles.get(i), true);
+			} catch (SearchEngineException e) {
+				e.printStackTrace();				
+			}
+		}
 		
-		//Überprüfen, ob das lastModified-Datum > Systemzeit ist
-		
-		//Check if there are more files (new added) or less files (deleted) in the directory
 				
 	}
 
+	
+	/**
+	 * Wird aufgerufen, wenn der Benutzer im 'Einstellungen'-Dialog ein neues Verzeichnis hinzufügt oder
+	 * ein bestehendes Verzeichnis entfernt. Dieses wird dann in den Index hinzugefügt oder entfernt.
+	 * Übergebenen Parameter (List<File>) sind niemals <code>null</code>, sondern höchstens leer.
+	 * @param addedDirectories    Liste der neu hinzugefügten Verzeichnisse.
+	 * @param removedDirectories  Liste der entfernten Verzeichnisse.
+	 * @throws SearchEngineException
+	 */
 	@Override
 	public void update(List<File> addedDirectories, List<File> removedDirectories) throws SearchEngineException {
 		
-		//addedDirectories not empty or null
-		//removedDirectories not empty or null
+		indexedDirectories = prefs.getDirectories();
+		
+		
+		try {
+			//addedDirectories not empty or null
+			if (!addedDirectories.isEmpty() || addedDirectories != null) {
+				indexedDirectories.addAll(addedDirectories);
+			}
+			//removedDirectories not empty or null
+			if (!removedDirectories.isEmpty() || removedDirectories != null) {
+				indexedDirectories.removeAll(removedDirectories);
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Object was null");
+			e.printStackTrace();
+		}
+		System.out.println(indexedDirectories);
 						
 	}
 
