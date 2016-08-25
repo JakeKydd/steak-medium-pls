@@ -165,14 +165,10 @@ public class ResultClass implements IResult{
 		
 						
 		for (int i = -1; (i = this.text_inhalt.toLowerCase().indexOf(this.search.toLowerCase(), i + 1)) != -1; ) {
-		    MarkBeginn.add(i);		    
+		    MarkBeginn.add(i);
+		    MarkEnd.add(i + this.search.length()-1);		   
 		}  
-		
-		for (int i = this.text_inhalt.length(); (i = this.text_inhalt.toLowerCase().lastIndexOf(this.search.toLowerCase(), i - 1)) != -1; ) {
-		   	MarkEnd.add(i + this.search.length()-1);		    
-		}
-		
-		Collections.reverse(MarkEnd);
+
 		Map<Integer, Integer> Highlights = new HashMap<Integer, Integer>();
 		
 		for (int i = 0; i < MarkBeginn.size(); i++) {			
