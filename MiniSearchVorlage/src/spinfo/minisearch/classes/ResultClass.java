@@ -166,7 +166,7 @@ public class ResultClass implements IResult{
 						
 		for (int i = -1; (i = this.text_inhalt.toLowerCase().indexOf(this.search.toLowerCase(), i + 1)) != -1; ) {
 		    MarkBeginn.add(i);
-		    MarkEnd.add(i + this.search.length()-1);		   
+		    MarkEnd.add(i + this.search.toLowerCase().length()-1);		   
 		}  
 
 		Map<Integer, Integer> Highlights = new HashMap<Integer, Integer>();

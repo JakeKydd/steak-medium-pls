@@ -75,9 +75,9 @@ public class SearchEngineClass implements ISearchEngine {
 			String[] splitted = text.split("\\s+");
 			for (int i=0; i < splitted.length; i++) {
 					
-				if (indexedWords.containsKey(splitted[i])) {
+				if (indexedWords.containsKey(splitted[i].toLowerCase())) {
 					System.out.println("Wort" + splitted[i] + " kommt vor in: " + indexedWords.get(splitted[i]));
-					res.setFilename(indexedWords.get(splitted[i]));
+					res.setFilename(indexedWords.get(splitted[i].toLowerCase()));
 					res.setSearchKeyword(text.toLowerCase());
 					
 					//resultFiles.addAll((Collection<? extends IResult>) indexedWords.get(splitted[i]));
@@ -322,7 +322,7 @@ public class SearchEngineClass implements ISearchEngine {
 				String subStringFromText = text.substring(start, end);
 					
 				//words.add(subStringFromText);
-				words.put(subStringFromText, files.get(i));
+				words.put(subStringFromText.toLowerCase(), files.get(i));
 					
 				start = end;
 				end = iterator.next();
@@ -333,8 +333,15 @@ public class SearchEngineClass implements ISearchEngine {
 			System.out.println("Key:" + key + "\n Value: " + words.get(key));
 			
 		} */
+		for (String words1: words.keySet()){
+
+            String key = words1.toString();
+            String value = words.get(words1).toString();  
+            System.out.println(key + " " + value);  
+
+
+			} 
 		
-				
 		return words;
 	}
 	
